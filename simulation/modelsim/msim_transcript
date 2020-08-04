@@ -1,0 +1,54 @@
+# Reading D:/AlteraFPGA/modelsim_ase/tcl/vsim/pref.tcl 
+# do top_run_msim_gate_verilog.do 
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
+# }
+# vlib gate_work
+# vmap work gate_work
+# Copying D:\AlteraFPGA\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini
+# ** Warning: Copied D:\AlteraFPGA\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
+#          Updated modelsim.ini.
+# 
+# vlog -vlog01compat -work work +incdir+. {top_8_1200mv_85c_slow.vo}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# 
+# vlog -vlog01compat -work work +incdir+D:/FPGA_Verilog/XY_Motor/simulation/modelsim {D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt}
+# Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+# -- Compiling module top_vlg_tst
+# 
+# Top level modules:
+# 	top_vlg_tst
+# 
+# vsim -t 1ps +transport_int_delays +transport_path_delays -L altera_ver -L cycloneive_ver -L gate_work -L work -voptargs="+acc"  top_vlg_tst
+# vsim +transport_int_delays +transport_path_delays -L altera_ver -L cycloneive_ver -L gate_work -L work -voptargs=\"+acc\" -t 1ps top_vlg_tst 
+# Loading work.top_vlg_tst
+# Loading work.top
+# Loading cycloneive_ver.cycloneive_io_obuf
+# Loading cycloneive_ver.cycloneive_io_ibuf
+# Loading cycloneive_ver.cycloneive_clkctrl
+# Loading cycloneive_ver.cycloneive_mux41
+# Loading cycloneive_ver.cycloneive_ena_reg
+# Loading cycloneive_ver.cycloneive_lcell_comb
+# Loading altera_ver.dffeas
+# SDF 10.1d Compiler 2012.11 Nov  2 2012
+# 
+# Loading instances from top_8_1200mv_85c_v_slow.sdo
+# Loading altera_ver.PRIM_GDFF_LOW
+# Loading timing data from top_8_1200mv_85c_v_slow.sdo
+# ** Note: (vsim-3587) SDF Backannotation Successfully Completed.
+#    Time: 0 ps  Iteration: 0  Instance: /top_vlg_tst File: D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt
+# 
+# add wave *
+# view structure
+# .main_pane.structure.interior.cs.body.struct
+# view signals
+# .main_pane.objects.interior.cs.body.tree
+# run -all
+# Break in Module top_vlg_tst at D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt line 98
+# Simulation Breakpoint: Break in Module top_vlg_tst at D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt line 98
+# MACRO ./top_run_msim_gate_verilog.do PAUSED at line 17

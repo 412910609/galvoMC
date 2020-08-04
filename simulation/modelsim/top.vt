@@ -1,0 +1,237 @@
+// Copyright (C) 1991-2013 Altera Corporation
+// Your use of Altera Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Altera Program License 
+// Subscription Agreement, Altera MegaCore Function License 
+// Agreement, or other applicable license agreement, including, 
+// without limitation, that your use is for the sole purpose of 
+// programming logic devices manufactured by Altera and sold by 
+// Altera or its authorized distributors.  Please refer to the 
+// applicable agreement for further details.
+
+// *****************************************************************************
+// This file contains a Verilog test bench template that is freely editable to  
+// suit user's needs .Comments are provided in each section to help the user    
+// fill out necessary details.                                                  
+// *****************************************************************************
+// Generated on "07/09/2020 16:25:44"
+                                                                                
+// Verilog Test Bench template for design : top
+// 
+// Simulation tool : ModelSim-Altera (Verilog)
+// 
+
+`timescale 1 ps/ 1 ps
+module top_vlg_tst();
+// constants                                           
+// general purpose registers
+// test vector input registers
+reg rst_n;
+reg sys_clk;
+reg xy_clk;
+reg xy_sync;
+reg xy_x_data;
+reg xy_sync_n;
+
+reg [15:0] set_x_pos;
+reg [15:0] set_x_pos_n;
+reg [20:0] tx_x_data;
+reg [20:0] tx_x_data_n;
+reg		  tx_start;
+reg		  tx_start_n;
+reg [ 5:0] bit_cnt;
+reg [ 5:0] bit_cnt_n;
+
+reg 	[ 1:0]	det_clk_edge;
+wire	[ 1:0]	det_clk_edge_n;
+reg				clk_posedge_reg;
+wire				clk_posedge_reg_n;
+// wires  
+wire m_en;                                             
+wire dir;
+wire pul;
+wire m_arrived;
+wire m_busy;
+//wire [15:0] m_x_vel;
+wire [15:0] m_x_pos;
+wire [15:0] rec_x_pos;
+wire xy_done_flag;
+//wire [1:0]	m_cur_state;
+//wire [15:0] m_time_cnt;
+
+// assign statements (if any)                          
+top i1 (
+// port map - connection between master ports and signals/registers   
+	.sys_clk		(sys_clk		),
+	.rst_n		(rst_n		),
+	
+	.m_en			(m_en			),
+	.dir			(dir			),
+	.pul			(pul			),
+	
+//	.set_x_vel	(m_x_vel    ),
+//	.m_time_cnt	(m_time_cnt ),
+//	.m_cur_state(m_cur_state),
+	.m_arrived	(m_arrived	),
+	.m_busy		(m_busy		),
+	.set_x_pos	(m_x_pos		),
+	.rec_x_pos	(rec_x_pos	),
+	.xy_done_flag(xy_done_flag),
+	
+	.xy_clk		(xy_clk		),
+	.xy_sync		(xy_sync		),
+	.xy_x_data	(xy_x_data	)
+);
+initial                                                
+begin                                                  
+// code that executes only once                        
+// insert code here --> begin
+	#0 sys_clk = 1'b0;
+		rst_n   = 1'b1;
+		xy_clk  = 1'b0;
+		xy_sync = 1'b0;
+	#10000 rst_n = 1'b0;
+	#10000 rst_n = 1'b1;
+   #1000000000 $stop;		//1ms                               
+// --> end                                             
+$display("Running testbench");                       
+end  
+
+always #10000	//10ns => 50M
+begin
+	sys_clk = ~sys_clk;
+end
+
+always #250000	//0.25us => 2M
+begin
+	xy_clk = ~xy_clk;
+end
+
+//时序电路,det_clk_edge
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		det_clk_edge <= 2'b00;
+	else
+		det_clk_edge <= det_clk_edge_n;
+end
+//组合电路
+assign det_clk_edge_n = {det_clk_edge[0], xy_clk};
+
+//时序电路,clk_posedge_reg
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		clk_posedge_reg <= 1'b0;
+	else
+		clk_posedge_reg <= clk_posedge_reg_n;
+end
+//组合电路
+assign clk_posedge_reg_n = (det_clk_edge == 2'b01) ? 1'b1 : 1'b0;
+
+//时序电路,bit_cnt
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		bit_cnt <= 5'b0;
+	else
+		bit_cnt <= bit_cnt_n;
+end
+
+//组合电路,bit_cnt
+always @ (*)
+begin
+	if(bit_cnt >= 5'd20)
+		bit_cnt_n = 5'd0;
+	else if(clk_posedge_reg && (tx_start ^ xy_sync))
+		bit_cnt_n = bit_cnt +5'b1;
+	else 
+		bit_cnt_n = bit_cnt;
+end
+	
+//时序电路,xy_sync
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		xy_sync <= 1'b0;
+	else
+		xy_sync <= xy_sync_n;
+end
+
+//组合电路,xy_sync_n
+always @ (*)
+begin
+	if(bit_cnt == 5'd1)
+		xy_sync_n = 1'b1;
+	else if(bit_cnt == 5'd20)
+		xy_sync_n = 1'b0;
+	else 
+		xy_sync_n = xy_sync;
+end
+
+//时序电路,set_x_pos
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		set_x_pos <= 16'd10;
+	else
+		set_x_pos <= set_x_pos_n;
+end
+//组合电路,set_x_pos_n
+always @ (*)
+begin
+	if(set_x_pos == 16'd500)
+		set_x_pos_n = 16'd10;
+	else if(m_arrived)
+		set_x_pos_n = set_x_pos + 16'd10;
+	else 
+		set_x_pos_n = set_x_pos;
+end
+
+//时序电路,tx_start
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		tx_start <= 1'b1;
+	else
+		tx_start <= tx_start_n;
+end
+//组合电路,tx_start_n
+always @ (*)
+begin
+	if(xy_sync)
+		tx_start_n = 1'b0; 
+	else if(m_arrived)
+		tx_start_n = 1'b1;
+	else 
+		tx_start_n = tx_start;
+end
+
+//时序电路,tx_x_data
+always @ (posedge sys_clk or negedge rst_n)
+begin
+	if(!rst_n)
+		tx_x_data <= {1'b0, 3'b001, 16'd10, 1'b0};
+	else
+		tx_x_data <= tx_x_data_n;
+end
+
+//组合电路,tx_x_data_n
+always @ (*)
+begin
+	if(tx_start)
+		tx_x_data_n = {1'b0, 3'b001, set_x_pos, 1'b0};
+	else 
+		tx_x_data_n = tx_x_data;
+end
+
+always @ (*)
+begin
+	xy_x_data = tx_x_data[20 - bit_cnt];
+end
+                                                   
+endmodule
+

@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\FPGA_Verilog\XY_Motor\simulation\modelsim
+vtop
+IX]14TTXNA<EooTRc0ji[D0
+VV_RX76`^Y=g9[2X7<Z;hl0
+Z1 dD:\FPGA_Verilog\XY_Motor\simulation\modelsim
+w1594352350
+8top_8_1200mv_85c_slow.vo
+Ftop_8_1200mv_85c_slow.vo
+L0 31
+Z2 OV;L;10.1d;51
+r1
+31
+Z3 o-vlog01compat -work work -O0
+!i10b 1
+!s100 ]FHX5Tjjk]SnN?i]zMVBU2
+!s85 0
+!s108 1594352422.484000
+!s107 top_8_1200mv_85c_slow.vo|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+.|top_8_1200mv_85c_slow.vo|
+!s101 -O0
+!s92 -vlog01compat -work work +incdir+. -O0
+vtop_vlg_tst
+!i10b 1
+!s100 QR_2?7fVOTj?Ra56SN;L30
+I]kV<hH1nn0k@7TD<Wl@;n2
+VWH`X8iAJ@;Z6_Z>8HHbjI2
+R1
+w1594352402
+8D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt
+FD:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt
+L0 28
+R2
+r1
+!s85 0
+31
+!s108 1594352422.913000
+!s107 D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt|
+!s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+D:/FPGA_Verilog/XY_Motor/simulation/modelsim|D:/FPGA_Verilog/XY_Motor/simulation/modelsim/top.vt|
+!s101 -O0
+R3
+!s92 -vlog01compat -work work +incdir+D:/FPGA_Verilog/XY_Motor/simulation/modelsim -O0

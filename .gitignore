@@ -1,0 +1,16 @@
+/db/
+/greybox_tmp/
+/incremental_db/
+
+/output_files/*.*
+!/output_files/*.pof
+!/output_files/*.sof
+
+/simulation/modelsim/*.*
+!/simulation/modelsim/*.vt
+
+*.bak
+*.zip
+*.tmp 
+*.rpt
+*.qarlog
